@@ -60,16 +60,26 @@ namespace ChatApplication
                     MainWindow.lstContacts.AddOnUI(clientName);
                 }
 
-                String sessionText = server.ChatSession();
+                //String sessionText = server.ChatSession();
+                ArrayList sessionText = server.ChatSession();
                 MainWindow.lstChat.ClearOnUI();
-                MainWindow.lstChat.AddOnUI(sessionText);
+
+                foreach (String chatLine in sessionText)
+                {
+                    MainWindow.lstChat.AddOnUI(chatLine);
+                }
+
+                MainWindow.lstBxChatCode.UpdateScroll();
+                //MainWindow.lstChat.AddOnUI(sessionText);
             }
         }
 
         public void sendText(string text)
         {
-            String toSend = name + ": ";
-            server.AddText(name + ":\n" + text + "\n\n");
+            //String toSend = name + ": ";
+            //server.AddText(toSend);
+            server.AddText(text, name);
+            //server.AddText(name + ":\n" + text + "\n");
         }
     }
 

@@ -7,7 +7,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*"/>
             <RowDefinition Height="1.5*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height=".6*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="1">
@@ -15,7 +15,7 @@
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <ListBox x:Name="lstBxChat" Grid.Column="0" Margin="10" ItemsSource="{Binding}"></ListBox>
+            <ListBox x:Name="lstBxChat" Grid.Column="0" Margin="10" ItemsSource="{Binding}" ScrollViewer.VerticalScrollBarVisibility="Visible"></ListBox>
             <ListBox x:Name="lstBxContacts" Grid.Column="1" Margin="10" ItemsSource="{Binding}"></ListBox>
         </Grid>
 
@@ -23,7 +23,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <TextBox x:Name="txtMessage" Grid.Column="0" Margin="10"/>
+            <TextBox x:Name="txtMessage" Grid.Column="0" Margin="10" KeyDown="txtMessage_KeyDown"/>
         </Grid>
 
         <Grid Grid.Row="3" Margin="0,10,0,10">

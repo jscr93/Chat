@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections;
 
 namespace ChatServerDLL
@@ -7,8 +8,9 @@ namespace ChatServerDLL
     {
         private ArrayList clients = new ArrayList(); // Names of clients
 
-        private String chatSession = ""; // Holds text for chat session
+        private ArrayList chatSession = new ArrayList(); // Holds text for chat session
 
+        private String lastUser = null;
         // Commands
         public void AddClient(String name)
         {
@@ -29,13 +31,21 @@ namespace ChatServerDLL
             }
         }
 
-        public void AddText(String newText)
+        public void AddText(String newText, String name)
         {
             if (newText != null)
             {
                 lock (chatSession)
                 {
-                    chatSession += newText;
+                    if(lastUser == name)
+                        chatSession.Add(newText);
+                    else
+                    {
+                        lastUser = name;
+                        chatSession.Add("");
+                        chatSession.Add(name + " dice:");
+                        chatSession.Add(newText);
+                    }
                 }
             }
         }
@@ -46,7 +56,7 @@ namespace ChatServerDLL
             return clients;
         }
 
-        public String ChatSession()
+        public ArrayList ChatSession()
         {
             return chatSession;
         }

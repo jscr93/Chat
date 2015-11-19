@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace ChatApplication
 {
@@ -18,5 +20,14 @@ namespace ChatApplication
             Application.Current.Dispatcher.BeginInvoke(addMethod, item);
         }
 
+        public static void UpdateScroll(this ListBox listbox)
+        {
+            Action scrollBottom = new Action(() => {
+                    var border = (Border)VisualTreeHelper.GetChild(listbox, 0);
+                    var scrollViewer = (ScrollViewer)VisualTreeHelper.GetChild(border, 0);
+                    scrollViewer.ScrollToBottom();
+            });
+            Application.Current.Dispatcher.BeginInvoke(scrollBottom);
+        }
     }
 }

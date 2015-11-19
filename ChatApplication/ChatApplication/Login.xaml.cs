@@ -35,16 +35,21 @@ namespace ChatApplication
         {
             RemotingConfiguration.RegisterWellKnownClientType(
             typeof(ChatServer), "http://localhost:12345/ChatServer");
+            //typeof(ChatServer), "http://192.168.100.3:12345/ChatServer");
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
+            if(string.IsNullOrEmpty(txtUser.Text))
+            {
+                MessageBox.Show("Debe ingresar un nombre de usuario valido", "Ha ocurrido un problema", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                return;
+            }
             MainWindow mw = new MainWindow(txtUser.Text);
             this.Hide();
             if(mw.isOnline)
                 mw.ShowDialog();
             this.Show();
-
         }
     }
 }
