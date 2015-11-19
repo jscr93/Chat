@@ -1,0 +1,46 @@
+﻿<Window x:Class="ChatApplication.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525" Closing="Window_Closing">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ListBox x:Name="lstBxChat" Grid.Column="0" Margin="10" ItemsSource="{Binding}"></ListBox>
+            <ListBox x:Name="lstBxContacts" Grid.Column="1" Margin="10" ItemsSource="{Binding}"></ListBox>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="txtMessage" Grid.Column="0" Margin="10"/>
+        </Grid>
+
+        <Grid Grid.Row="3" Margin="0,10,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnSend" Width="100" Grid.Column="1" Click="btnSend_Click">
+                <TextBlock Text="Send Text" TextWrapping="Wrap"></TextBlock>
+            </Button>
+            <Button x:Name="btnClear" Width="100" Grid.Column="2" Click="btnClear_Click">
+                <TextBlock Text="Clear Text" TextWrapping="Wrap"></TextBlock>
+            </Button>
+        </Grid>
+
+    </Grid>
+</Window>
+
