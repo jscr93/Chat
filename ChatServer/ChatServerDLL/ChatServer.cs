@@ -49,10 +49,18 @@ namespace ChatServerDLL
                         usersConversation.chatSession.Add(newText);
                     else
                     {
+//<<<<<<< HEAD
                         usersConversation.lastUser = name1;
                         usersConversation.chatSession.Add("");
                         usersConversation.chatSession.Add(name1 + " dice:");
                         usersConversation.chatSession.Add(newText);
+//=======
+//                        if(lastUser != null)
+//                            chatSession.Add("");
+//                        lastUser = name;
+//                        chatSession.Add(name + " dice:");
+//                        chatSession.Add(newText);
+//>>>>>>> origin/master
                     }
                 }
             }
