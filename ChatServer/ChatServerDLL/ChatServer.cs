@@ -41,8 +41,9 @@ namespace ChatServerDLL
                         chatSession.Add(newText);
                     else
                     {
+                        if(lastUser != null)
+                            chatSession.Add("");
                         lastUser = name;
-                        chatSession.Add("");
                         chatSession.Add(name + " dice:");
                         chatSession.Add(newText);
                     }
