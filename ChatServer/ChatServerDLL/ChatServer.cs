@@ -8,15 +8,9 @@ namespace ChatServerDLL
     public class ChatServer : MarshalByRefObject
     {
         private ArrayList clients = new ArrayList(); // Names of clients
-        private List<Conversation> conversations = new List<Conversation>();
+        private ArrayList chatSession = new ArrayList(); // Holds text for chat session
+        private String lastUser = null;
 
-        private class Conversation
-        {
-            public string user1 { get; set; }
-            public string user2 { get; set; }
-            public string lastUser = null;
-            public ArrayList chatSession = new ArrayList(); // Holds text for chat session
-        }
 
         // Commands
         public void AddClient(String name)
@@ -38,29 +32,21 @@ namespace ChatServerDLL
             }
         }
 
-        public void AddText(string newText, string name1, string name2)
+        public void AddText(String newText, String name)
         {
-            if (newText != null)
+            if (!string.IsNullOrWhiteSpace(newText))
             {
-                Conversation usersConversation = conversations.Where(c => (c.user1 == name1 && c.user2 == name2) || (c.user1 == name2 && c.user2 == name1)).First();
-                lock (usersConversation.chatSession)
+                lock (chatSession)
                 {
-                    if(usersConversation.lastUser == name1)
-                        usersConversation.chatSession.Add(newText);
+                    if (lastUser == name)
+                        chatSession.Add(newText);
                     else
                     {
-//<<<<<<< HEAD
-                        usersConversation.lastUser = name1;
-                        usersConversation.chatSession.Add("");
-                        usersConversation.chatSession.Add(name1 + " dice:");
-                        usersConversation.chatSession.Add(newText);
-//=======
-//                        if(lastUser != null)
-//                            chatSession.Add("");
-//                        lastUser = name;
-//                        chatSession.Add(name + " dice:");
-//                        chatSession.Add(newText);
-//>>>>>>> origin/master
+                        if(lastUser != null)
+                            chatSession.Add("");
+                        lastUser = name;
+                        chatSession.Add(name + " dice:");
+                        chatSession.Add(newText);
                     }
                 }
             }
@@ -72,20 +58,9 @@ namespace ChatServerDLL
             return clients;
         }
 
-        public ArrayList ChatSession(string name1, string name2)
+        public ArrayList ChatSession()
         {
-            List<Conversation> usersConversation = conversations.Where(c => (c.user1 == name1 && c.user2 == name2) || (c.user1 == name2 && c.user2 == name1)).ToList();
-            if (usersConversation.Count > 0)
-                return usersConversation[0].chatSession;
-            else
-            {
-                Conversation newConversation = new Conversation { user1 = name1, user2 = name2 };
-                lock (conversations)
-                {
-                    conversations.Add(newConversation);
-                }
-                return newConversation.chatSession;
-            }
+            return chatSession;
         }
     }
 

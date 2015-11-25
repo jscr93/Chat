@@ -61,13 +61,15 @@ namespace ChatApplication
                 }
 
                 //String sessionText = server.ChatSession();
-                ArrayList sessionText = server.ChatSession();
+                ArrayList sessionText = null;
+                sessionText = server.ChatSession();
                 MainWindow.lstChat.ClearOnUI();
 
-                foreach (String chatLine in sessionText)
-                {
-                    MainWindow.lstChat.AddOnUI(chatLine);
-                }
+                if(sessionText != null)
+                    foreach (String chatLine in sessionText)
+                    {
+                        MainWindow.lstChat.AddOnUI(chatLine);
+                    }
 
                 MainWindow.lstBxChatCode.UpdateScroll();
                 //MainWindow.lstChat.AddOnUI(sessionText);

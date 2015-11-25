@@ -20,6 +20,7 @@ namespace ChatApplication
         private ChatClient chat;
         public static ListBox lstBxChatCode;
 
+
         public MainWindow(string name)
         {
 
@@ -77,6 +78,7 @@ namespace ChatApplication
                 btnSend.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
             }
         }
+
     }
 
 
